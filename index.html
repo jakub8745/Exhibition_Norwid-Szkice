@@ -566,8 +566,8 @@ if (canVibrate) window.navigator.vibrate(100)
 
         //console.log(navigator.maxTouchPoints)
       // find intersections
-      //if (whatTouch == 2) {
-       if (whatTouch == 1) {
+      if (whatTouch == 2) {
+      // if (whatTouch == 1) {
 
         raycaster.setFromCamera(pickPosition, camera);
 
@@ -587,8 +587,8 @@ if (canVibrate) window.navigator.vibrate(100)
               INTERSECTED.name != "Floor" &&
               INTERSECTED.name != "Wall" &&
               INTERSECTED.name != "SpotLight" &&
-            //  whatTouch == 2
-              whatTouch == 1
+            whatTouch == 2
+             // whatTouch == 1
             ) {
 
 
