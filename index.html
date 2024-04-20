@@ -56,28 +56,28 @@ Upgrade:
   const targetStartH = new THREE.Vector3();
   ///////////
   const getDeviceType = () => {
-  const ua = navigator.userAgent;
-  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    return "it is a tablet";
-  }
-  if (
-    /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
-      ua
-    )
-  ) {
-    return "it is a mobile";
-  }
-  return "it is a desktop";
-};
-/////////////////////////////
-//alert(getDeviceType());
-console.log(navigator.userAgent);
-console.log(getDeviceType());
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      return "it is a tablet";
+    }
+    if (
+      /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+        ua
+      )
+    ) {
+      return "it is a mobile";
+    }
+    return "it is a desktop";
+  };
+  /////////////////////////////
+  //alert(getDeviceType());
+  console.log(navigator.userAgent);
+  console.log(getDeviceType());
 
 
-const deviceType = getDeviceType()
+  const deviceType = getDeviceType()
 
-console.log(deviceType)
+  console.log(deviceType)
   main();
 
   function main() {
@@ -178,12 +178,12 @@ console.log(deviceType)
     ////////////////////////////////////////
     // CONTROLS
 
-//console.log('device',deviceType)
-/*
-if (deviceType == 'mobile'){
-  const controls = new DeviceOrientationControls( camera );
-} else {
-*/
+    //console.log('device',deviceType)
+    /*
+    if (deviceType == 'mobile'){
+      const controls = new DeviceOrientationControls( camera );
+    } else {
+    */
     const controls = new OrbitControls(camera, renderer.domElement);
     // const controls = new TrackballControls(camera, renderer.domElement);
 
@@ -200,17 +200,13 @@ if (deviceType == 'mobile'){
       TWO: THREE.TOUCH.DOLLY_PAN
     }
 
-
     controls.screenSpacePanning = false;
     controls.minDistance = 0;
     controls.maxDistance = 0.2; /////////////  zmienione dla utrzymania dystansu camera-target
-    //controls.enablePan = true;
     controls.panSpeed = 20;
     controls.rotateSpeed = 0.2;
     controls.enableZoom = true;
     controls.zoomSpeed = 10;
-    //controls.minZoom = 1;
-    //controls.minZoom = 1;
     controls.maxPolarAngle = Math.PI / 2; // Limit angle of visibility
     controls.minPolarAngle = Math.PI / 2;
     controls.target.copy(new THREE.Vector3(0, 1.4, 0));
@@ -220,10 +216,6 @@ if (deviceType == 'mobile'){
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.update();
-//ś}
-    ////////
-
-
 
     //Bouncing Box
     const computeSphereCenter = () => {
@@ -252,16 +244,12 @@ if (deviceType == 'mobile'){
 
     scene.add(plane);
 
-
     camera.matrix.extractBasis(ignore1, ignore2, front_vector);
     //put the camera at a negative distance from the object.
     camera.position.copy(controls.target);
     camera.position.addScaledVector(front_vector, distance);
 
     const setPickPosition = (event) => {
-
-
-
 
       let pos = getCanvasRelativePosition(event);
       pickPosition.x = (pos.x / renderer.domElement.clientWidth) * 2 - 1;
@@ -287,8 +275,6 @@ if (deviceType == 'mobile'){
     window.addEventListener("click", setPickPosition);
     window.addEventListener("mouseout", clearPickPosition);
     window.addEventListener("mouseleave", clearPickPosition);
-   // window.addEventListener("mousemove", stopTWEEN);
-
 
     window.addEventListener(
       "touchstart",
@@ -307,16 +293,11 @@ if (deviceType == 'mobile'){
     controls.addEventListener("end", function () {
       if (document.getElementById("infoDOM").style.display === "block" && isTweenCompleted === true) {
         window.TimeoutID = setTimeout(() => { document.getElementById("infoDOM").style.display = `none` }, 1000);
-
       }
-
     });
 
     controls.addEventListener("change", function () {
 
-      if (clickTimer == null) { 
-      
-      }
       if (scene.children !== undefined) {
         const object1 = scene.getObjectByName("BouncingSphere");
         object1.position.copy(computeSphereCenter());
@@ -352,32 +333,22 @@ if (deviceType == 'mobile'){
         var intersectsa = raycaster.intersectObjects(scene.children, true);
         ///////////////////////////////////////// Click and sound only if drawing is cliked
 
-        if(!intersectsa[1]) return
+        if (!intersectsa[1]) return
         if (
-          intersectsa[1].object.name == "frame" 
+          intersectsa[1].object.name == "frame"
 
         ) {
           const canVibrate = window.navigator.vibrate
-if (canVibrate) window.navigator.vibrate(100)
-        // console.log( window.navigator.vibrate(200));
-          ///////////////// playing audio CLICK:
-          /*
-          const x = document.getElementById("myAudio");
-          const playAudio = () => {
-            x.play();
-          }
-          playAudio();
-          */
+          if (canVibrate) window.navigator.vibrate(100)
+
           /////////////// change colour lighter for x ms: 
-//console.log("llskkjdclksajhck,s")
           const m1 = new THREE.MeshStandardMaterial();
           m1.copy(intersectsa[1].object.material);
-          
+
           intersectsa[1].object.material = m1;
           intersectsa[1].object.material.color.addScalar(0.4);
           const func = () => {
-            intersectsa[1].object.material.color.setRGB(1,1,1);
-            //intersectsa[1].object.material.color.set(0xFFF3F8);
+            intersectsa[1].object.material.color.setRGB(1, 1, 1);
           }
           setTimeout(func, 100);
         }
@@ -393,18 +364,8 @@ if (canVibrate) window.navigator.vibrate(100)
         whatTouch = 2;
       }
     };
-/*
-    const stopTWEEN = () => {
-      console.log(tweenTarget.onUpdate)
-      if (tweenTarget.onUpdate){
-        console.log('idzie')
-      }
-    }
-*/
+
     const makeInfoDOM = (infoName) => {
-
-
-
 
       document.getElementById("infoDOM").style.display = `none`;
       const found = obrazyArray.find(({ name }) => name === infoName.name);
@@ -422,10 +383,7 @@ if (canVibrate) window.navigator.vibrate(100)
       cameraStart.copy(camera.position);
       cameraEnd.copy(infoName.position);
       let distance = found.distanceToObject;// tu przeniesione
-      /*  if (found.name === "szafa"){
-          targetEnd.y = 1.1;
-        }
-        */
+
       // DODANE
       if (found.name === "TargetUp" || found.name === "TargetDo") {
         targetEnd.y = 1.4;
@@ -476,25 +434,15 @@ if (canVibrate) window.navigator.vibrate(100)
 
       tweenTarget.start();
 
-
-
       const tweenCamera = new TWEEN.Tween(cameraStart).to(cameraEnd, 2000);
       tweenCamera.onUpdate(function () {
         camera.position.x = cameraStart.x;
         camera.position.z = cameraStart.z;
       });
 
-      //////////////
-
-
-
-      //////////////
-
       tweenCamera.start();
 
-    //
-    
-
+      //
       if (found.name !== "TargetUp" && found.name !== "TargetDo" && found.name !== "opis") {
         tweenTarget.onComplete(function () {
           document.getElementById("infoGesty").style.display = "none";
@@ -506,7 +454,7 @@ if (canVibrate) window.navigator.vibrate(100)
       }
     };
 
-
+//
     const makeFeedback = (paintName) => { };
     const getCanvasRelativePosition = (event) => {
       const rect = renderer.domElement.getBoundingClientRect();
@@ -563,13 +511,8 @@ if (canVibrate) window.navigator.vibrate(100)
 
 
 
-      //    ///////
-      //renderer.physicallyCorrectLights = true;
-
-        //console.log(navigator.maxTouchPoints)
       // find intersections
       if (whatTouch == 2) {
-      // if (whatTouch == 1) {
 
         raycaster.setFromCamera(pickPosition, camera);
 
@@ -582,17 +525,14 @@ if (canVibrate) window.navigator.vibrate(100)
 
 
             if (
-              //INTERSECTED.name != "opis" &&
               INTERSECTED.name != "BouncingSphere" &&
               INTERSECTED.name != "BouncingSphere0" &&
               INTERSECTED.name != "Sill" &&
               INTERSECTED.name != "Floor" &&
               INTERSECTED.name != "Wall" &&
               INTERSECTED.name != "SpotLight" &&
-            whatTouch == 2
-             // whatTouch == 1
+              whatTouch == 2
             ) {
-
 
               makeInfoDOM(INTERSECTED);
             }
@@ -602,7 +542,6 @@ if (canVibrate) window.navigator.vibrate(100)
         }
         whatTouch = 0;
         INTERSECTED = null;
-        //INTERSECTED.children[0].material.emissive.set(0);
         window.clearTimeout(window.timeoutID);
         clearPickPosition();
       }
@@ -617,8 +556,6 @@ if (canVibrate) window.navigator.vibrate(100)
       const closeInfoButton1 = () => {
         document.getElementById("infoButton").style.display = "none";
       };
-      //////////////////////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////////////////////
 
       requestAnimationFrame(render);
     };
