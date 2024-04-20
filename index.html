@@ -190,9 +190,9 @@ if (deviceType == 'mobile'){
 
 
     controls.mouseButtons = {
-      RIGHT: THREE.MOUSE.ROTATE,
+      RIGHT: THREE.MOUSE.PAN,
       MIDDLE: THREE.MOUSE.DOLLY,
-      LEFT: THREE.MOUSE.PAN
+      LEFT: THREE.MOUSE.ROTATE
     };
 
     controls.touches = {
@@ -351,6 +351,8 @@ if (deviceType == 'mobile'){
         raycaster.setFromCamera(pickPosition, camera);
         var intersectsa = raycaster.intersectObjects(scene.children, true);
         ///////////////////////////////////////// Click and sound only if drawing is cliked
+
+        if(!intersectsa[1]) return
         if (
           intersectsa[1].object.name == "frame" 
 

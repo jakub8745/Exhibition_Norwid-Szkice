@@ -416,14 +416,14 @@ class OrbitControls extends EventDispatcher {
           // orthographic
           panLeft(
             (deltaX * (scope.object.right - scope.object.left)) /
-              scope.object.zoom /
-              element.clientWidth,
+            scope.object.zoom /
+            element.clientWidth,
             scope.object.matrix
           );
           panUp(
             (deltaY * (scope.object.top - scope.object.bottom)) /
-              scope.object.zoom /
-              element.clientHeight,
+            scope.object.zoom /
+            element.clientHeight,
             scope.object.matrix
           );
         } else {
@@ -839,6 +839,7 @@ class OrbitControls extends EventDispatcher {
 
       switch (state) {
         case STATE.ROTATE:
+
           if (scope.enableRotate === false) return;
 
           handleMouseMoveRotate(event);
